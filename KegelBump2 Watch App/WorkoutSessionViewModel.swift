@@ -318,11 +318,12 @@ final class WorkoutSessionViewModel: ObservableObject {
 
         SessionHaptics.tick()
 
-        if remainingSeconds > 1 {
+        if remainingSeconds > 0 {
             remainingSeconds -= 1
-        } else {
-            advancePhase()
+            return
         }
+
+        advancePhase()
     }
 
     private func advancePhase() {
