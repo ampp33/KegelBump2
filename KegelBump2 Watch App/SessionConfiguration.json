@@ -1,0 +1,18 @@
+{
+  "blocks": [
+    {
+      "repeatCount": 10,
+      "phases": [
+        { "type": "hold", "duration": 7 },
+        { "type": "rest", "duration": 7 }
+      ]
+    },
+    {
+      "repeatCount": 10,
+      "phases": [
+        { "type": "hold", "duration": 2 },
+        { "type": "rest", "duration": 2 }
+      ]
+    }
+  ]
+}
