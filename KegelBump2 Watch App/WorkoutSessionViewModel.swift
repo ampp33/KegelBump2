@@ -198,7 +198,7 @@ final class WorkoutSessionViewModel: ObservableObject {
     }
 
     var completedRepetitionsText: String {
-        return "\(completedRepetitions)/\(totalSets)"
+        "\(completedRepetitions)/\(totalSets)\n\(sessionInstructionLabel)"
     }
 
     var remainingTimeDisplay: String {
@@ -232,6 +232,25 @@ final class WorkoutSessionViewModel: ObservableObject {
         }
 
         return max(0, currentSet - 1)
+    }
+
+    private var sessionInstructionLabel: String {
+        if isComplete || !sessionStarted {
+            return "Ready"
+        }
+
+        if !isRunning {
+            return "Pause"
+        }
+
+        switch currentPhase?.type {
+        case .hold:
+            return "Squeeze"
+        case .rest:
+            return "Rest"
+        case .none:
+            return "Ready"
+        }
     }
 
     private var sessionRemainingSeconds: Int {

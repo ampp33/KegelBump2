@@ -51,11 +51,6 @@ struct ContentView: View {
                             onCenterLongPress: presentEditor
                         )
                         .frame(width: ringSize, height: ringSize)
-
-                        Text(instructionText)
-                            .font(.footnote.weight(.medium))
-                            .foregroundStyle(.white)
-                            .multilineTextAlignment(.center)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 }
@@ -68,18 +63,6 @@ struct ContentView: View {
                     }
                 }
             }
-        }
-    }
-
-    private var instructionText: String {
-        if viewModel.isComplete {
-            return "Session complete!"
-        } else if !viewModel.sessionStarted {
-            return "Tap start to begin"
-        } else if viewModel.currentPhase?.type == .hold {
-            return "Squeeze and hold"
-        } else {
-            return "Rest and breathe"
         }
     }
 
@@ -204,6 +187,8 @@ private struct RepetitionBadge: View {
         Text(text)
             .font(.system(size: 11, weight: .bold, design: .rounded))
             .foregroundStyle(.white)
+            .multilineTextAlignment(.center)
+            .lineLimit(2)
             .padding(.horizontal, 10)
             .padding(.vertical, 4)
     }
