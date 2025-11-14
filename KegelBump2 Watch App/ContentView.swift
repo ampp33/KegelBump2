@@ -14,20 +14,19 @@ struct ContentView: View {
     var body: some View {
         NavigationStack(path: $path) {
             GeometryReader { geometry in
-                let widthLimit = max(geometry.size.width - 24, 110)
-                let heightLimit = max(geometry.size.height * 0.95, 110)
+                let widthLimit = geometry.size.width
+                let heightLimit = geometry.size.height
                 let ringSize = min(widthLimit, heightLimit)
 
                 ZStack {
                     Color.black.ignoresSafeArea()
 
-                    VStack(spacing: 0) {
-                        VStack(spacing: 0) {
-                            CircularProgressView(
-                                progress: viewModel.progress,
-                                tintColor: viewModel.circleTint,
-                                displayNumber: viewModel.displaySeconds,
-                                repsDoneText: viewModel.completedRepetitionsText,
+                    VStack(spacing: 12) {
+                        CircularProgressView(
+                            progress: viewModel.progress,
+                            tintColor: viewModel.circleTint,
+                            displayNumber: viewModel.displaySeconds,
+                            repsDoneText: viewModel.completedRepetitionsText,
                             westContent: AnyView(
                                 CornerControlButton(
                                     icon: viewModel.isRunning ? "pause.fill" : "play.fill",
@@ -52,20 +51,14 @@ struct ContentView: View {
                             onCenterLongPress: presentEditor
                         )
                         .frame(width: ringSize, height: ringSize)
-                        .padding(.vertical, 0)
 
-                            Text(instructionText)
-                                .font(.footnote.weight(.medium))
-                                .foregroundStyle(.white)
-                                .multilineTextAlignment(.center)
-                                .padding(.top, 14)
-                        }
-
-                        Spacer(minLength: max(geometry.safeAreaInsets.bottom, 4))
+                        Text(instructionText)
+                            .font(.footnote.weight(.medium))
+                            .foregroundStyle(.white)
+                            .multilineTextAlignment(.center)
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 }
-                .padding([.leading, .trailing], 0)
             }
             .navigationDestination(for: Destination.self) { destination in
                 switch destination {
